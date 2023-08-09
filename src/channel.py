@@ -52,4 +52,53 @@ class Channel:
         jsonFile.write(json_string)
         jsonFile.close()
 
+    def __str__(self):
+        return f"'{self.channel['items'][0]['snippet']['title']} (https://www.youtube.com/channel/{self.channel['items'][0]['id']})'"
 
+    def __add__(self, other):
+        return int(self.channel['items'][0]['statistics']['subscriberCount']) + int(other.channel['items'][0][
+            'statistics'][
+            'subscriberCount'])
+    def __sub__(self, other):
+        return int(other.channel['items'][0]['statistics']['subscriberCount']) - int(self.channel['items'][0][
+            'statistics'][
+            'subscriberCount'])
+
+    def __gt__(self, other):
+        if int(self.channel['items'][0]['statistics']['subscriberCount']) > int(other.channel['items'][0][
+            'statistics'][
+            'subscriberCount']):
+            return True
+        else:
+            return False
+
+
+    def __ge__(self, other):
+        if int(self.channel['items'][0]['statistics']['subscriberCount']) >= int(other.channel['items'][0][
+            'statistics'][
+            'subscriberCount']):
+            return True
+        else:
+            return False
+
+    def __lt__(self, other):
+        if int(self.channel['items'][0]['statistics']['subscriberCount']) < int(other.channel['items'][0][
+            'statistics'][
+            'subscriberCount']):
+            return True
+        else:
+            return False
+
+    def __le__(self, other):
+        if int(self.channel['items'][0]['statistics']['subscriberCount']) <= int(other.channel['items'][0]['statistics']['subscriberCount']):
+            return True
+        else:
+            return False
+
+    def __eq__(self, other):
+        if int(self.channel['items'][0]['statistics']['subscriberCount']) == int(other.channel['items'][0][
+            'statistics'][
+            'subscriberCount']):
+            return True
+        else:
+            return False
