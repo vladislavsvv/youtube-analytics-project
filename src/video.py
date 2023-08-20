@@ -27,11 +27,6 @@ class PLVideo(Video):
         self.playlist_id = playlist_id
 
     def __str__(self):
-        playlist_videos = Video.youtube.playlistItems().list(playlistId=self.playlist_id, part='contentDetails',
+        playlist_videos = Video.youtube.playlistItems().list(playlistId=self.playlist_id, part='snippet',
                                                              maxResults=50, ).execute()
-        video_id = playlist_videos['items'][0]['contentDetails']['videoId']
-        video_response = Video.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
-                                                     id=video_id).execute()
-        return video_response['items'][0]['snippet']['title']
-
-
+        return playlist_videos['items'][0]['snippet']['title']
